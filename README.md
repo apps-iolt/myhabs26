@@ -6,7 +6,7 @@ sed -i 's/\r$//' install-thingsboard-ssl.sh
 sudo ./install-thingsboard-ssl.sh
 
 # Correct usage
-sudo ./install-thingsboard-ssl.sh --domain "myhabs26.malaysiawest.cloudapp.azure.com" --email "user@example.com" --db-password "myhabs@IOT26"
+sudo ./install-thingsboard-ssl.sh --domain "domain.example.com" --email "user@example.com" --db-password "MyPassword123"
 
 # View help
 sudo ./install-thingsboard-ssl.sh --help
