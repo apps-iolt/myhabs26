@@ -1,7 +1,9 @@
 To use on a fresh VM:
 
 sed -i 's/\r$//' install-thingsboard-ssl.sh
+
 chmod +x install-thingsboard-ssl.sh
+
 sudo ./install-thingsboard-ssl.sh
 
 
