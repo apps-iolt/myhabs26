@@ -6,9 +6,9 @@
 set -euo pipefail
 
 # ----------------------------- CONFIGURATION ---------------------------------
-DOMAIN=""              # e.g. mythingsboard.eastus.cloudapp.azure.com
-EMAIL=""               # e.g. admin@yourdomain.com
-DB_PASSWORD=""         # Same password you used in the first run
+DOMAIN="myhabs26.malaysiawest.cloudapp.azure.com"              # e.g. mythingsboard.eastus.cloudapp.azure.com
+EMAIL="iolayerz.technology@gmail.com"               # e.g. admin@yourdomain.com
+DB_PASSWORD="myhabs@IOT26"         # Same password you used in the first run
 
 # Optional
 TB_VERSION=""
