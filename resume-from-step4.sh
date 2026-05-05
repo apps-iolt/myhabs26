@@ -41,7 +41,7 @@ if [[ -n "$TB_VERSION" ]]; then
     TB_FULL_VERSION="$TB_VERSION"
 else
     TB_FULL_VERSION=$(curl -s https://api.github.com/repos/thingsboard/thingsboard/releases/latest | \
-        grep '"tag_name"' | sed -E 's/.*"v(.*)"/\1/')
+        grep '"tag_name"' | sed -E 's/.*"v([^"]+)".*/\1/')
     if [[ -z "$TB_FULL_VERSION" ]]; then
         echo "WARNING: Could not detect latest version. Falling back to 4.3.1.1"
         TB_FULL_VERSION="4.3.1.1"
