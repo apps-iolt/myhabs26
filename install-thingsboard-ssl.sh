@@ -7,36 +7,43 @@
 set -euo pipefail
 
 # ----------------------------- CONFIGURATION ---------------------------------
-# Defaults (can be overridden via command-line arguments)
 DOMAIN=""
 EMAIL=""
 DB_PASSWORD=""
 TB_VERSION=""
 
-# Parse command-line arguments (override defaults if provided)
+print_usage() {
+    echo "Usage: sudo $0 --domain <DOMAIN> --email <EMAIL> --db-password <PASSWORD> [--tb-version <VERSION>]"
+    echo ""
+    echo "Required:"
+    echo "  --domain       Domain name (e.g. mythingsboard.eastus.cloudapp.azure.com)"
+    echo "  --email        Email for Let's Encrypt SSL certificate"
+    echo "  --db-password  PostgreSQL password for ThingsBoard"
+    echo ""
+    echo "Optional:"
+    echo "  --tb-version   ThingsBoard version (e.g. 4.3.1.1). Defaults to latest."
+    echo ""
+    echo "Example:"
+    echo "  sudo $0 --domain \"myhabs.eastus.cloudapp.azure.com\" --email \"admin@example.com\" --db-password \"MySecurePass123\""
+}
+
+# Parse command-line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
         --domain)      DOMAIN="$2"; shift 2 ;;
         --email)       EMAIL="$2"; shift 2 ;;
         --db-password) DB_PASSWORD="$2"; shift 2 ;;
         --tb-version)  TB_VERSION="$2"; shift 2 ;;
-        -h|--help)
-            echo "Usage: sudo $0 [OPTIONS]"
-            echo ""
-            echo "Options (all optional, defaults are pre-configured):"
-            echo "  --domain       Domain name (default: $DOMAIN)"
-            echo "  --email        Email for SSL cert (default: $EMAIL)"
-            echo "  --db-password  PostgreSQL password (default: uses pre-configured value)"
-            echo "  --tb-version   ThingsBoard version (default: latest)"
-            exit 0 ;;
-        *) echo "Unknown option: $1"; exit 1 ;;
+        -h|--help)     print_usage; exit 0 ;;
+        *)             echo "Unknown option: $1"; print_usage; exit 1 ;;
     esac
 done
 
 # ----------------------------- VALIDATION ------------------------------------
 if [[ -z "$DOMAIN" || -z "$EMAIL" || -z "$DB_PASSWORD" ]]; then
-    echo "ERROR: DOMAIN, EMAIL, and DB_PASSWORD are required."
-    echo "Either edit the script or pass them as arguments: sudo $0 --domain <DOMAIN> --email <EMAIL> --db-password <PASSWORD>"
+    echo "ERROR: --domain, --email, and --db-password are required."
+    echo ""
+    print_usage
     exit 1
 fi
 
